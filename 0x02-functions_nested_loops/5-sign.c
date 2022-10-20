@@ -2,8 +2,8 @@
 
 /**
  * print_sign - print sign
- * @n: argument
- * Return: 1, 0 or -1
+ * @n: number of the sign
+ * Return: 1 if positive 0 if zero -1 if negative
  */
 int print_sign(int n)
 {
@@ -19,7 +19,7 @@ int print_sign(int n)
 	}
 	else
 	{
-		putchar('-');
+		_putchar('-');
 		return (-1);
 	}
 }
