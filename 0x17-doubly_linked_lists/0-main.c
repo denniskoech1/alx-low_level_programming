@@ -22,6 +22,7 @@ int main(void)
         dprintf(2, "Error: Can't malloc\n");
         return (EXIT_FAILURE);
     }
+
     new->n = 9;
     head->prev = new;
     new->next = head;
