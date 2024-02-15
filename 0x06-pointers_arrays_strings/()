@@ -1,4 +1,4 @@
-#include "main.h"
+#include "main.
 
 /**
  * cap_string - capitalizes words
@@ -33,4 +33,3 @@ char *cap_string(char *str)
 	}
 
 	return (str);
-}
