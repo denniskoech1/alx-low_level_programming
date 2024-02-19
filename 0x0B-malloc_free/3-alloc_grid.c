@@ -1,43 +1,63 @@
-#include "main.h"
-/**
- * alloc_grid - allocates a grid, make space and free space
- * @width: takes in width of grid
- * @height: height of grid
- * Return: grid with freed spaces
- */
+#include <stdlib.h>
+void freeing(int **heap_array, int height);
 
+/**
+ * alloc_grid - Allocates a grid based on height and width
+ * @width: An integer
+ * @height: An integer
+ * Return: A pointer to the begining of the string
+ */
 int **alloc_grid(int width, int height)
 {
-	/*Declaring variables*/
-	int **grid;
-	int i, j;
+	int i;
+	int j;
+	int **heap_array;
 
+	/* Checking for negatives*/
 	if (width <= 0 || height <= 0)
-	{
 		return (NULL);
-	}
-
-	grid = malloc(sizeof(int *) * height); /*malloc*/
-
-	if (grid == NULL)
-	{
+	/*Allocating memory for rows*/
+	heap_array = malloc(sizeof(int *) * height);
+	if (heap_array == NULL)
 		return (NULL);
+	/*Allocating memory for each collum*/
+	for (i = 0; i < height; i++)
+	{
+		heap_array[i] = malloc(sizeof(int) * width);
+		if (heap_array[i] == NULL)
+		{
+			for (j = 0; j < i; j++)
+			{
+				free(heap_array[j]);
+			}
+			free(heap_array);
+
+		}
+
 	}
+	/*Initializing the array*/
+	for (i = 0; i < height; i++)
+	{
+		for (j = 0; j < width; j++)
+		{
+			heap_array[i][j] = 0;
+		}
+	}
+	return (heap_array);
+}
+
+/**
+ * freeing - frees an array
+ * @heap_array: An array
+ * @height: An integer
+ */
+void freeing(int **heap_array, int height)
+{
+	int i;
 
 	for (i = 0; i < height; i++)
 	{
-		grid[i] = malloc(sizeof(int) * width);
-		if (grid[i] == NULL)
-		{
-			for (i = i - 1; i >= 0; i--)
-			{
-				free(grid[i]);
-			}
-			free(grid);
-			return (NULL);
-		}
+		free(heap_array[i]);
 	}
-	for (i = 0; j < width; j++)
-		grid[i][j] = 0;
-	return (grid);
+	free(heap_array);
 }

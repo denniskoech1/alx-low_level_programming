@@ -1,68 +1,28 @@
-#include "main.h"
+#include <stdlib.h>
 /**
- *_strlen - count array
- *@s: array of elements
- *Return: 1
- */
-
-int _strlen(char *s)
-{
-	unsigned int i;
-
-	i = 0;
-	while (s[i] != '\0') /*count character of string*/
-	{
-		i++;
-	}
-
-	return (i);
-}
-
-/**
- *_strcpy - copy arrays
- *@src: array of elements
- *@dest: dest array
- *Return: dest
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int i = 0;
-
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-
-	return (dest);
-}
-
-/**
- *_strdup - array for prints a string
- *@str: array of elements
- *Return: pointer
+ * _strdup - Duplicates a string using malloc
+ * @str: String to be duplicated
+ * Return: NULL if not enough space in memory otherwise a pointer
+ * to the beginning of the array
  */
 
 char *_strdup(char *str)
 {
-	char *dst;
-	unsigned int size;
+	int len;
+	int i;
+	char *heap_array;
 
-	if (str == 0)
-	{
+	if (str == NULL)
 		return (NULL);
-	}
-
-	size = _strlen(str) + 1;
-
-	dst = (char *) malloc(size * sizeof(char));
-
-	if (dst == 0)
-	{
+	for (len = 0; str[len] != '\0'; len++)
+	{}
+	heap_array = malloc(len + 1);
+	if (heap_array == NULL)
 		return (NULL);
+	for (i = 0; i < len ; i++)
+	{
+		heap_array[i] = str[i];
 	}
-	_strcpy(dst, str);
-	return (dst);
+	heap_array[i] = '\0';
+	return (heap_array);
 }
